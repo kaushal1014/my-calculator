@@ -34,6 +34,54 @@ def divide(a, b):
     return result
 
 # TODO: Students will add multiply, divide, power, sqrt functions
+def multiply(a, b):
+    if not isinstance(a, (int, float)) or not isinstance(b, (int, float)):
+        raise TypeError("Both arguments must be numbers")
+    result = 0
+    count = 0
+    while count < abs(b):
+        result += a
+        count += 1
+    if b < 0:
+        result = -result
+    return result
+
+def divide(a, b):
+    if not isinstance(a, (int, float)) or not isinstance(b, (int, float)):
+        raise TypeError("Division requires numeric inputs")
+    if b == 0:
+        raise ValueError("Division by zero not allowed")
+    quotient = 0
+    remainder = abs(a)
+    divisor = abs(b)
+    while remainder >= divisor:
+        remainder -= divisor
+        quotient += 1
+    if (a < 0 and b > 0) or (a > 0 and b < 0):
+        quotient = -quotient
+    return quotient
+
+def power(a, b):
+    if not isinstance(a, (int, float)) or not isinstance(b, int):
+        raise TypeError("Power requires numeric base and integer exponent")
+    result = 1
+    count = 0
+    while count < abs(b):
+        result = multiply(result, a)
+        count += 1
+    if b < 0:
+        result = divide(1, result)  # returns 0 for large denominators
+    return result
+
+def sqrt(n):
+    if not isinstance(n, (int, float)):
+        raise TypeError("Sqrt requires numeric input")
+    if n < 0:
+        raise ValueError("Negative numbers not supported")
+    x = 0
+    while multiply(x, x) <= n:
+        x += 1
+    return x - 1
 
 if __name__ == "__main__":
     print("🧮 Calculator Module")
